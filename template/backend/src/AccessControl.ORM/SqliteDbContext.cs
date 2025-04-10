@@ -9,10 +9,7 @@ namespace Be.CDB.Data.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("FileName=sqlite_cdb", option =>
-            {
-                option.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-            });
+            optionsBuilder.UseSqlite("DataSource=app.db;Cache=Shared");
 
             base.OnConfiguring(optionsBuilder);
         }
@@ -21,8 +18,9 @@ namespace Be.CDB.Data.Context
         {
             modelBuilder.Entity<User>()
                 .ToTable("Users", "AccessControl")
-                .HasData(new User 
+                .HasData(new User
                 {
+                    Id = Guid.NewGuid(),
                     Username = "mcmoriam",
                     Email = "mcmoriam@gmail.com",
                     Password = "mcM0ri@m",
