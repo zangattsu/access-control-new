@@ -10,6 +10,6 @@ export class LoginComponent implements OnInit {
   constructor(private oktaAuth: OktaAuthStateService) {}
 
   ngOnInit(): void {
-    this.oktaAuth.handleLoginRedirect();
+    //this.oktaAuth.handleLoginRedirect();
   }
 }
