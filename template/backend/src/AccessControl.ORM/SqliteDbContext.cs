@@ -7,6 +7,8 @@ namespace Be.CDB.Data.Context
 {
     public class SqliteDbContext : DbContext
     {
+        public DbSet<User> Users { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("DataSource=app.db;Cache=Shared");
