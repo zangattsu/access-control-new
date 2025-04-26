@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login-callback',
-  imports: [],
-  templateUrl: './login-callback.component.html',
-  styleUrl: './login-callback.component.css'
+  standalone: true,
+  imports: [CommonModule],
+  template: '<div>Processando login...</div>',
 })
-export class LoginCallbackComponent {
+export class LoginCallbackComponent implements OnInit {
+  private authService = inject(AuthService);
 
+  ngOnInit() {
+    this.authService.handleAuthentication();
+  }
 }

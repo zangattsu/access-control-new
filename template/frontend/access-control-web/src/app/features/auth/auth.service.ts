@@ -16,10 +16,10 @@ export class AuthService {
 
     constructor() {
         this.oktaAuth = new OktaAuth(oktaAuthConfig);
-        this.checkAuthstatus();
+        this.checkAuthStatus();
     }
 
-    async checkAuthstatus() {
+    async checkAuthStatus() {
         const authenticated = await this.oktaAuth.isAuthenticated();
         this.isAuthenticated.set(authenticated);
 
@@ -37,7 +37,7 @@ export class AuthService {
         try {
             const tokenResponse = await this.oktaAuth.token.parseFromUrl();
             this.oktaAuth.tokenManager.setTokens(tokenResponse.tokens);
-            await this.checkAuthstatus();
+            await this.checkAuthStatus();
             this.router.navigate(['/']);
         } catch (error) {
             console.error('Error handling authentication:', error);

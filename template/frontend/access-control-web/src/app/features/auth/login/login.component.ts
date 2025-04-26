@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { OktaAuthStateService } from '@okta/okta-angular';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-login',
-  template: `<p>Processando login...</p>`,
-  // Removed invalid imports array
+  standalone: true,
+  imports: [CommonModule],
+  template: `
+    <div class="login-container">
+      <h2>Login</h2>
+      <button (click)="login()">Login com Okta</button>
+    </div>
+  `,
 })
-export class LoginComponent implements OnInit {
-  constructor(private oktaAuth: OktaAuthStateService) {}
+export class LoginComponent {
+  private authService = inject(AuthService);
 
-  ngOnInit(): void {
-    //this.oktaAuth.handleLoginRedirect();
+  login() {
+    this.authService.login();
   }
 }
