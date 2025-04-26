@@ -4,7 +4,7 @@ namespace AccessControl.Domain.Common;
 
 public class BaseEntity<T> : IEntity<T>, IComparable<BaseEntity<T>> // Updated to specify the generic type argument
 {
-    public T Id { get; }
+    public T Id { get; } = default!;
 
     public Task<IEnumerable<ValidationErrorDetail>> ValidateAsync()
     {
