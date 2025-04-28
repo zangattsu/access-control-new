@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './features/auth/login/login.component';
 import { authGuard } from './features/auth/auth.guard';
 import { LoginCallbackComponent } from './features/auth/login-callback/login-callback.component';
+import { HomeComponent } from './features/home/home.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
