@@ -1,15 +1,21 @@
-import { ApplicationConfig } from '@angular/core';
-import { provideRouter, withComponentInputBinding, withPreloading, PreloadAllModules } from '@angular/router';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import { routes } from './app.routes';
+import {
+  provideClientHydration,
+  withEventReplay,
+} from '@angular/platform-browser';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(
-      routes,
-      withComponentInputBinding(),
-      withPreloading(PreloadAllModules)
-    ),
-    provideClientHydration(), provideClientHydration(withEventReplay())
-  ]
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()),
+    importProvidersFrom(ReactiveFormsModule),
+  ],
 };

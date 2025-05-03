@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-
+  public authService = inject(AuthService);  
+  
+  logout() {
+    // Mantendo a opção de redirecionar diretamente para o Okta
+    this.authService.logout();
+  }
 }

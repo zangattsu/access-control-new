@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "okta-auth-project": {
+    "okta-access-control": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/okta-auth-project",
+            "outputPath": "dist/okta-access-control",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -26,13 +26,12 @@
             ],
             "styles": ["src/styles.css"],
             "scripts": [],
+            "server": "src/main.server.ts",
+            "outputMode": "server",
+            "prerender": true,
             "ssr": {
               "entry": "src/server.ts"
-            },
-            "allowedCommonJsDependencies": ["lodash"],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "outputMode": "server"
+            }
           },
           "configurations": {
             "production": {
@@ -62,10 +61,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "okta-auth-project:build:production"
+              "buildTarget": "okta-access-control:build:production"
             },
             "development": {
-              "buildTarget": "okta-auth-project:build:development"
+              "buildTarget": "okta-access-control:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -90,8 +89,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "73fde05d-a43c-4bfa-ab39-538555c1a97d"
   }
 }

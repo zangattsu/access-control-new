@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'okta-auth-project' title`, () => {
+  it(`should have the 'okta-access-control' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('okta-auth-project');
+    expect(app.title).toEqual('okta-access-control');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, okta-auth-project');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, okta-access-control');
   });
 });
