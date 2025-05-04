@@ -1,0 +1,11 @@
+<nav>
+    <ul>
+      <li><a routerLink="/">Início</a></li>
+      @if (authService.isAuthenticated()) {
+        <li><a routerLink="/dashboard">Dashboard</a></li>
+        <li><button (click)="logout()">Logout</button></li>
+      } @else {
+        <li><a routerLink="/login">Login</a></li>
+      }
+    </ul>
+  </nav>

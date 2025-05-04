@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
@@ -10,7 +10,7 @@ import { AuthService } from '../auth.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public authService = inject(AuthService);
   private fb = inject(FormBuilder);
   
@@ -20,9 +20,7 @@ export class LoginComponent {
     // Mantendo a opção de redirecionar diretamente para o Okta
     this.authService.login();
   }  
- 
-  loginWithOkta() {
-    // Mantendo a opção de redirecionar diretamente para o Okta
+  ngOnInit(): void {
     this.authService.login();
   }
 }
