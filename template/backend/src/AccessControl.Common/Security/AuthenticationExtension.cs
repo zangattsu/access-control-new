@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -13,15 +14,13 @@ namespace AccessControl.Common.Security
         {
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
-            var secretKey = configuration["Jwt:SecretKey"]?.ToString();
-            ArgumentException.ThrowIfNullOrWhiteSpace(secretKey);
-
-            var key = Encoding.ASCII.GetBytes(secretKey);
-
-            services.AddAuthentication(x =>
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                // Defina o endereço do operador de tokens do Okta (issuer)
+                options.Authority = "https://dev-21512408.okta.com/oauth2/default";
+
+                // Defina o audience (recursos da API) conforme configurado no Okta
+                options.Audience = "api://default";
             })
             .AddJwtBearer(x =>
             {
@@ -29,11 +28,11 @@ namespace AccessControl.Common.Security
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
+                    ValidateIssuer = true,
+                    ValidIssuer = "https://dev-21512408.okta.com/oauth2/default",
                     ValidateAudience = false,
-                    ClockSkew = TimeSpan.Zero
+                    ValidAudience = "api://default",
+                    ValidateLifetime = true
                 };
             });
 
