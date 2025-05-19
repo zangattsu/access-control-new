@@ -10,6 +10,8 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { OktaAuthInterceptor } from './features/auth/okta-auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +19,13 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     importProvidersFrom(ReactiveFormsModule),
+    provideHttpClient(
+      withInterceptorsFromDi()
+    ),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: OktaAuthInterceptor,
+      multi: true
+    }
   ],
 };
